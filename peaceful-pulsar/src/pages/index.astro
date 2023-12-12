@@ -1,6 +1,7 @@
 ---
 import Annonce from "../components/Annonce.astro";
-import Vsl from "../components/Vsl.astro";
+import LeftContent from "../components/LeftContent.astro";
+import RightContent from "../components/Vsl.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
@@ -8,7 +9,8 @@ import Layout from "../layouts/Layout.astro";
   <div class="container">
     <Annonce />
     <div class="content">
-      <Vsl />
+      <RightContent />
+      <LeftContent />
     </div>
   </div>
 </Layout>
@@ -16,10 +18,13 @@ import Layout from "../layouts/Layout.astro";
 <style>
   .container {
     background-color: #01011b;
+    height: 100%;
   }
 
   .content {
     width: 70%;
+    display: flex;
+    gap: 5%;
     margin: auto;
     background-color: rebeccapurple;
   }

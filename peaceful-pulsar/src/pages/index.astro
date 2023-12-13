@@ -1,7 +1,7 @@
 ---
 import Annonce from "../components/Annonce.astro";
-import LeftContent from "../components/LeftContent.astro";
-import RightContent from "../components/Vsl.astro";
+import LeftContent from "../components/RightContent.astro";
+import RightContent from "../components/LeftContent.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
@@ -9,8 +9,8 @@ import Layout from "../layouts/Layout.astro";
   <div class="container">
     <Annonce />
     <div class="content">
-      <RightContent />
       <LeftContent />
+      <RightContent />
     </div>
   </div>
 </Layout>

@@ -1,42 +1,40 @@
-
 <button>
   <div class="container">
     <div class="all-lines">
       <div class="first-line">
-        <img src="public/images/arrow.png" alt="Arrow" />
+        <img src="astrosite1/images/arrow.png" alt="Arrow" />
         <p>J'OBTIENS UNE LANDING PAGE PERFORMANTE</p>
       </div>
-      <p>APPEL AMICAL ! Tu décides tranquillement si tu me confies le projet.</p>
+      <p>
+        APPEL AMICAL ! Tu décides tranquillement si tu me confies le projet.
+      </p>
     </div>
-    <img src="public/images/twitter-X.svg" />
+    <img src="astrosite1/images/twitter-X.svg" />
   </div>
 </button>
 
 <style>
- 
+  .first-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
 
-.first-line {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-}
+  .all-lines {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 3px;
+  }
 
-.all-lines{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction:column;
-  gap: 3px;
-}
-
-img{
-  width: 30px;
-  height: 30px;
-}
+  img {
+    width: 30px;
+    height: 30px;
+  }
 
   button {
-    
     background-color: #f20d5e;
     border-radius: 20px;
     width: 535px;
@@ -46,7 +44,7 @@ img{
     box-shadow: inset 4px 1px 2px #00000040;
   }
 
-  .container{
+  .container {
     display: flex;
     gap: 2px;
   }

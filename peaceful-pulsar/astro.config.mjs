@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
 import react from "@astrojs/react";
 
@@ -6,5 +6,5 @@ import react from "@astrojs/react";
 export default defineConfig({
   integrations: [react()],
   site: "https://axhatem.github.io",
-  base: "/astrosite1"
+  base: "/astrosite1/",
 });

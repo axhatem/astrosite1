@@ -6,26 +6,25 @@ import Testimonial from "./Testimonial.astro";
 import FreeConsultation from "./free-consultation/FreeConsultation.astro";
 import CTA from "./cta/CTA.astro";
 import TestimonialFinance from "./testimonial-finance/TestimonialFinance.astro";
-
 ---
 
 <section id="main-section">
-  <SimpleReview/>
+  <SimpleReview />
   <MainTitle />
   <SubTitle />
   <Testimonial />
   <FreeConsultation />
-  <CTA/>
-  <TestimonialFinance/>
+  <CTA />
+  <TestimonialFinance />
 </section>
 
 <style>
   section {
+    margin: 20px auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 60px;
     width: 50%;
-    height: 500px;
     background-color: brown;
   }
 </style>

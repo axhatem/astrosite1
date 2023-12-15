@@ -1,24 +1,38 @@
-<html><head>
-    <style>
-        .box {
-		  height: 100px;
-		  display: flex;
-		  align-items: center; /* Vertical */
-		  justify-content: center; /* Horizontal */
-		  border:2px solid black;
-		}
-
-		.box div {
-		  width: 100px;
-		  height: 20px;
-		  border:1px solid;
-		}
-    </style>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flex Layout</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
-<body>
-    <div class="box">
-	  <div>Hello</div>
-	  <p>World</p>
-	</div>
+<style>
+	body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
 
-</body></html>
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.white-box {
+    background-color: white;
+    height: 50px;
+}
+
+.green-box {
+    background-color: green;
+    flex-grow: 1;
+}
+
+</style>
+<body>
+    <div class="container">
+        <div class="white-box"></div>
+        <div class="green-box"></div>
+        <div class="white-box"></div>
+    </div>
+</body>
+</html>

@@ -3,17 +3,26 @@
     <div class="all-lines">
       <div class="first-line">
         <img src="public/images/arrow.png" alt="Arrow" />
-        <p>J'OBTIENS UNE LANDING PAGE PERFORMANTE</p>
+        <p class="text1">J'OBTIENS UNE LANDING PAGE PERFORMANTE</p>
       </div>
       <p>
         APPEL AMICAL ! Tu décides tranquillement si tu me confies le projet.
       </p>
     </div>
-    <img src="public/images/twitter-X.svg" alt="Twitter X" />
+    <img class="twitter-logo" src="public/images/twitter-X.svg" alt="Twitter X" />
   </div>
 </button>
 
 <style>
+  .text1 {
+    font-weight: 900;
+  }
+
+  .twitter-logo {
+    height: 50px;
+    width: 50px;
+  }
+  
   .first-line {
     display: flex;
     justify-content: center;
@@ -24,7 +33,7 @@
   .all-lines {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     flex-direction: column;
     gap: 3px;
   }
@@ -45,6 +54,7 @@
   }
 
   .container {
+    justify-content: center;
     display: flex;
     gap: 2px;
   }

@@ -32,10 +32,10 @@ jobs:
         run: npm run build
         working-directory: ./site1
 
-      - name: Replace 'data-astro' with 'comp'
-        run: |
-          find ./site1/dist -type f -exec sed -i 's/data-astro/comp/g' {} +
-        shell: bash
+      #- name: Replace 'data-astro' with 'comp'
+      #  run: |
+      #    find ./site1/dist -type f -exec sed -i 's/data-astro/comp/g' {} +
+      #  shell: bash
                 
       - name: Move images folder
         shell: pwsh
@@ -43,10 +43,17 @@ jobs:
           $buildOutputFolder = "site1/dist"
           $publishFolder = Join-Path $buildOutputFolder "public"
           $imagesFolder = Join-Path $buildOutputFolder "images"
+          $astroFolder = Join-Path $buildOutputFolder "_astro"
+
           if (Test-Path $imagesFolder) {
             New-Item -ItemType Directory -Path $publishFolder -Force
             Move-Item -Path $imagesFolder -Destination $publishFolder
           }
+          if (Test-Path $astroFolder) {
+            New-Item -ItemType Directory -Path $publishFolder -Force
+            Move-Item -Path $astroFolder -Destination $publishFolder
+          }
+
           $site1Folder = Join-Path $buildOutputFolder "site1"
           New-Item -ItemType Directory -Path $site1Folder -Force
           Get-ChildItem -Path $buildOutputFolder -Exclude "site1" |

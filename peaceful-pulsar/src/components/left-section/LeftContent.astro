@@ -1,5 +1,9 @@
-<section id="vsl">
-  <div class="vsl-header"></div>
+---
+import VslHeader from "./VslHeader.astro";
+---
+
+<section class="vsl">
+  <VslHeader />
   <div class="vsl-content">
     <iframe
       src="https://widget.senja.io/widget/8221b878-f37a-4607-abc2-025f17a6d9d4"
@@ -9,9 +13,8 @@
 </section>
 
 <style>
-  #vsl {
-    width: fit-content%;
-    height: fit-content;
+
+  .vsl {
     background-color: red;
   }
 
@@ -21,9 +24,6 @@
     height: 100%;
     width: 240px;
     overflow: hidden;
-  }
-
-  .vsl-header {
   }
 
   .vsl-content {

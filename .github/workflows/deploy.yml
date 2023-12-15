@@ -45,7 +45,7 @@ jobs:
           $site1Folder = Join-Path $buildOutputFolder "site1"
           New-Item -ItemType Directory -Path $site1Folder -Force
           Get-ChildItem -Path $buildOutputFolder -Exclude "site1" |
-            Move-Item -Destination $site1Folderr     
+            Move-Item -Destination $site1Folder     
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

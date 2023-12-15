@@ -9,26 +9,44 @@ import FiveRating from "../../common/FiveRating.astro";
     La communication entre nous a été à la fois simple et efficace. Je
     recommande le travail de Axel Landing Page, c'est un pro dans son domaine."
   </p>
-  <img src="public/images/finance-testimonial.png" />
-  <p>Finances Futures</p>
-  <p>Investissements en Bourse</p>
+  <div class="avatar">
+    <img src="public/images/finance-testimonial.png" />
+    <div class="avatar-text">
+      <p class="title">Finances Futures</p>
+      <p>Investissements en Bourse</p>
+    </div>
+  </div>
+
 </section>
 
 <style>
+
+.title {
+  font-weight: 500;
+}
+
+  img {
+    width: 42px;
+    height: 42px;
+  }
+.avatar {
+  display: flex;
+}
+
+.avatar-text{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
   section {
     gap: 6px;
     margin-top: 50px;
     display: flex;
-    justify-content: center; /* Centers horizontally */
-    align-items: center; /* Centers vertically */
-    width: 100%;
-    background-color: #ececec;
-    height: 37px;
-  }
-
-  img {
-    width: 20px;
-    height: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
   }
 
   p {

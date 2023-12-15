@@ -1,9 +1,16 @@
 ---
+import Footer from "../../components/Footer.astro";
+import LeftContent from "../../components/left-section/LeftContent.astro";
 import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout title="Mentions Legales">
-  <div class="container">Mentions Legales</div>
+    <div class="container">
+      <div class="content">
+        <LeftContent />
+      </div>
+      <Footer />
+    </div>
 </Layout>
 
 <style>

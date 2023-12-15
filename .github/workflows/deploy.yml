@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'site1/**'
   workflow_dispatch:
 
 permissions:
@@ -24,13 +26,15 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
+        working-directory: ./site1
+      
       - name: Build the site
         run: npm run build
-
+        working-directory: ./site1
+                
       - name: Move images folder
         run: |
-          $buildOutputFolder = "dist"
+          $buildOutputFolder = "site1/dist"
           $publishFolder = Join-Path $buildOutputFolder "public"
           $imagesFolder = Join-Path $buildOutputFolder "images"
 
@@ -48,6 +52,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/public
+          publish_dir: ./site1/dist
 
   # Additional jobs (if any) go here

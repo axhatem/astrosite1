@@ -41,6 +41,12 @@ jobs:
           New-Item -ItemType Directory -Path $publishFolder
           Move-Item -Path $imagesFolder -Destination $publishFolder
 
+      - name: Prepare deployment directory
+        shell: bash
+        run: |
+          mkdir site1/dist/site1
+          mv site1/dist/*.* site1/dist/site1/
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

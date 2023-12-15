@@ -38,14 +38,14 @@ jobs:
           $buildOutputFolder = "site1/dist"
           $publishFolder = Join-Path $buildOutputFolder "public"
           $imagesFolder = Join-Path $buildOutputFolder "images"
-          New-Item -ItemType Directory -Path $publishFolder
-          Move-Item -Path $imagesFolder -Destination $publishFolder
-
-      - name: Prepare deployment directory
-        shell: bash
-        run: |
-          mkdir site1/dist/site1
-          mv site1/dist/*.* site1/dist/site1/
+          if (Test-Path $imagesFolder) {
+            New-Item -ItemType Directory -Path $publishFolder -Force
+            Move-Item -Path $imagesFolder -Destination $publishFolder
+          }
+          $site1Folder = Join-Path $buildOutputFolder "site1"
+          New-Item -ItemType Directory -Path $site1Folder -Force
+          Get-ChildItem -Path $buildOutputFolder -Exclude "site1" |
+            Move-Item -Destination $site1Folderr     
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

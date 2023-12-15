@@ -2,7 +2,7 @@
 import FreeConsultationItem from "./FreeConsultationItem.astro";
 ---
 
-<div id="free-consultation">
+<div class="free-consultation">
   <h3>20MIN-CONSULTATION <span>(offert)</span></h3>
   <div class="free-consultation-items">
     <FreeConsultationItem>
@@ -24,11 +24,17 @@ import FreeConsultationItem from "./FreeConsultationItem.astro";
 </div>
 
 <style>
-  #free-consultation {
+  .free-consultation {
     display: flex;
     flex-direction: column;
-    background-color: cadetblue;
-    border: 1px solid salmon;
+    background-color: #222;
+    border: 1px solid #717070;
+    padding: 0.75rem;
+    width: fit-content;
+  }
+
+  h3 {
+    padding-left: 30px;
   }
 
   .free-consultation-items {

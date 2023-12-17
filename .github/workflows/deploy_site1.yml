@@ -1,0 +1,68 @@
+name: Deploy to GitHub Pages site 1
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'site1/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # or any version you prefer
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./site1
+      
+      - name: Build the site
+        run: npm run build
+        working-directory: ./site1
+
+      - name: Replace 'data-astro' with 'comp'
+        run: |
+          find ./site1/dist -type f -exec sed -i 's/data-astro/comp/g' {} +
+        shell: bash
+                
+      - name: Move images folder
+        shell: pwsh
+        run: |
+          $buildOutputFolder = "site1/dist"
+          $publishFolder = Join-Path $buildOutputFolder "public"
+          $imagesFolder = Join-Path $buildOutputFolder "images"
+          $astroFolder = Join-Path $buildOutputFolder "_astro"
+
+          if (Test-Path $imagesFolder) {
+            New-Item -ItemType Directory -Path $publishFolder -Force
+            Move-Item -Path $imagesFolder -Destination $publishFolder
+          }
+          if (Test-Path $astroFolder) {
+            New-Item -ItemType Directory -Path $publishFolder -Force
+            Move-Item -Path $astroFolder -Destination $publishFolder
+          }
+
+          $site1Folder = Join-Path $buildOutputFolder "site1"
+          New-Item -ItemType Directory -Path $site1Folder -Force
+          Get-ChildItem -Path $buildOutputFolder -Exclude "site1" |
+            Move-Item -Destination $site1Folder     
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site1/dist
+
+  # Additional jobs (if any) go here

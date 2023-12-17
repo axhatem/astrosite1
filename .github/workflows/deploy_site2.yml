@@ -1,10 +1,10 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages site 2
 
 on:
   push:
     branches: [ main ]
     paths:
-      - 'site1/**'
+      - 'site2/**'
   workflow_dispatch:
 
 permissions:
@@ -26,21 +26,21 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./site1
+        working-directory: ./site2
       
       - name: Build the site
         run: npm run build
-        working-directory: ./site1
+        working-directory: ./site2
 
       - name: Replace 'data-astro' with 'comp'
         run: |
-          find ./site1/dist -type f -exec sed -i 's/data-astro/comp/g' {} +
+          find ./site2/dist -type f -exec sed -i 's/data-astro/comp/g' {} +
         shell: bash
                 
       - name: Move images folder
         shell: pwsh
         run: |
-          $buildOutputFolder = "site1/dist"
+          $buildOutputFolder = "site2/dist"
           $publishFolder = Join-Path $buildOutputFolder "public"
           $imagesFolder = Join-Path $buildOutputFolder "images"
           $astroFolder = Join-Path $buildOutputFolder "_astro"
@@ -54,15 +54,15 @@ jobs:
             Move-Item -Path $astroFolder -Destination $publishFolder
           }
 
-          $site1Folder = Join-Path $buildOutputFolder "site1"
-          New-Item -ItemType Directory -Path $site1Folder -Force
-          Get-ChildItem -Path $buildOutputFolder -Exclude "site1" |
-            Move-Item -Destination $site1Folder     
+          $site2Folder = Join-Path $buildOutputFolder "site2"
+          New-Item -ItemType Directory -Path $site2Folder -Force
+          Get-ChildItem -Path $buildOutputFolder -Exclude "site2" |
+            Move-Item -Destination $site2Folder     
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./site1/dist
+          publish_dir: ./site2/dist
 
   # Additional jobs (if any) go here

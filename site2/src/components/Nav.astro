@@ -1,5 +1,7 @@
 ---
 // Composant Nav
+const pathname = Astro.url.pathname.split('/').slice(-1)[0];
+console.log("pathname", pathname);
 ---
 <style>
     .nav {
@@ -9,15 +11,19 @@
         background: #444;
     }
     .nav a {
+        font-weight: 500;;
         color: #fff;
         text-decoration: none;
+    }
+    .nav a.active {
+        color: wheat; /
     }
     </style>
     
     <div class="nav">
-        <a href="./">Accueil</a>
-        <a href="./contact">Contact</a>
-        <a href="./mentions-legales">Mentions Légales</a>
-        <a href="./a-propos">À Propos</a>
+        <a href="." class={pathname  === '' ? 'active' : ''}>Home</a>
+        <a href="./contact" class={pathname === 'contact' ? 'active' : ''}>Contact</a>
+        <a href="./mentions-legales" class={pathname === 'mentions-legales' ? 'active' : ''}>Mentions Légales</a>
+        <a href="./a-propos" class={pathname === 'a-propos' ? 'active' : ''}>À Propos</a>
     </div>
     

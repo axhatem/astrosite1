@@ -1,14 +1,16 @@
-name: Deploy to GitHub Pages site 1
+name: Deploy to GitHub Pages
 
 on:
+  # Trigger the workflow every time you push to the `main` branch
+  # Using a different branch name? Replace `main` with your branch’s name
   push:
     branches: [ main ]
-    paths:
-      - 'site1/**'
+  # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
 
+# Allow this job to clone the repo and create a page deployment
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -18,51 +20,20 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v3
+      - name: Install, build, and upload your site
+        uses: withastro/action@v1
+        # with:
+          # path: . # The root location of your Astro project inside the repository. (optional)
+          # node-version: 18 # The specific version of Node that should be used to build your site. Defaults to 18. (optional)
+          # package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
 
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18' # or any version you prefer
-
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./site1
-      
-      - name: Build the site
-        run: npm run build
-        working-directory: ./site1
-
-      - name: Replace 'data-astro' with 'comp'
-        run: |
-          find ./site1/dist -type f -exec sed -i 's/data-astro/comp/g' {} +
-        shell: bash
-                
-      - name: Move images folder
-        shell: pwsh
-        run: |
-          $buildOutputFolder = "site1/dist"
-          $publishFolder = Join-Path $buildOutputFolder "public"
-          $imagesFolder = Join-Path $buildOutputFolder "images"
-          $astroFolder = Join-Path $buildOutputFolder "_astro"
-
-          if (Test-Path $imagesFolder) {
-            New-Item -ItemType Directory -Path $publishFolder -Force
-            Move-Item -Path $imagesFolder -Destination $publishFolder
-          }
-          if (Test-Path $astroFolder) {
-            New-Item -ItemType Directory -Path $publishFolder -Force
-            Move-Item -Path $astroFolder -Destination $publishFolder
-          }
-
-          $site1Folder = Join-Path $buildOutputFolder "site1"
-          New-Item -ItemType Directory -Path $site1Folder -Force
-          Get-ChildItem -Path $buildOutputFolder -Exclude "site1" |
-            Move-Item -Destination $site1Folder     
-
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./site1/dist
-
-  # Additional jobs (if any) go here
+        id: deployment
+        uses: actions/deploy-pages@v1

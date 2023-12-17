@@ -1,8 +1,19 @@
 ---
-import ContactSection from "../components/ContactSection.astro";
-import Layout from "../layouts/layout.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Contact | Plombier Nice">
-    <ContactSection />
+    <style>
+        .contact-section {
+            padding: 1rem;
+        }
+        </style>
+        
+        <div class="contact-section">
+            <h1>Contactez-Nous</h1>
+            <p>Téléphone : 04 93 62 53 00</p>
+            <p>Email : contact@plomberienice.fr</p>
+            <p>Adresse : 22 Rue de la Liberté, 06000 Nice, France</p>
+        </div>
+        
 </Layout>
